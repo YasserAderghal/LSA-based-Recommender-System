@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="layout layout--3">
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-5">
+
+        {% for movie in movies %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{ movie.img_url }}" width="100%" >
+
+            <div class="card-body">
+              <h3>{{ movie.title }}</h3>
+              <p class="card-text">{{ movie.description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-primary">View</button>
+                </div>
+                <small class="text-muted">{{ movie.runtime }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {% endfor %}
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+      <nav aria-label="..." class="p-5">
+        <ul class="pagination justify-content-center">
+
+
+
+          {% for i in no_of_pages %}
+          {% if page_no == i %}
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" >{{ i }}</a>
+          </li>
+          {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif%}
+          {% endfor %}
+
+
+
+
+
+
+        </ul>
+      </nav>
+
+
+    </div>
+</div>
+<!-- Activities End -->
+</main>
+
+{% endblock %}
