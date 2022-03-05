@@ -10,9 +10,9 @@ from bson.json_util import dumps
 
 
 
-db_handle, mongo_client = get_db_handle("movie", "localhost", 25000, None, None)
+db_handle, mongo_client = get_db_handle("arxiv", "localhost", 25000, None, None)
 
-all_movies = list(db_handle["imdb"].find())
+all_articles = list(db_handle["new_papers"].find())
 
 
 
@@ -23,7 +23,7 @@ def home(request):
     num = 12
 
 
-    paginator = Paginator(all_movies, num)
+    paginator = Paginator(all_articles, num)
 
     try:
         movs = paginator.page(page)
@@ -34,14 +34,14 @@ def home(request):
 
     page_range = paginator.get_elided_page_range(number=page)
 
-    context =  {'movies': movs, 'page_range':page_range } 
+    context =  {'articles': movs, 'page_range':page_range } 
     return render(request , 'home/home.html', context)
 
 
 
-def movie(request, pk):
+def article(request, pk):
 
-    movie =  list(db_handle["imdb"].find({"movieId": pk })).pop()
-    print(movie)
-    context = {'id': pk , 'movie':movie}
-    return render(request, 'home/movie.html', context)
+    article =  list(db_handle["new_papers"].find({"paperId": pk })).pop()
+    context = {'id': pk , 'article':article}
+    return render(request, 'home/article.html', context)
+

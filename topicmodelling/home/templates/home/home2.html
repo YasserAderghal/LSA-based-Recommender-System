@@ -11,19 +11,19 @@
 
       <div class="row">
 
-        {% for article in articles %}
+        {% for movie in movies %}
 <!--ADD CLASSES HERE d-flex align-items-stretch-->
       <div class="col-lg-3 mb-4 d-flex align-items-stretch">
         <div class="card">
-          <!--<img src="" class="card-img-top" alt="Card Image">-->
+          <img src="{{ movie.img_url }}" class="card-img-top" alt="Card Image">
           <div class="card-body d-flex flex-column ">
-            <a class="card-title h4" href="/article/{{ article.paperId }}">{{ article.title }}</a>
-            <p class="card-text mb-4 text-truncate">{{ article.abstract }}</p>
-            <div class="d-flex justify-content-between align-items-center mt-auto">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text mb-4 text-truncate">{{ movie.description }}</p>
+            <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-primary" href="/article/{{ article.paperId }}">View</a>
+                  <a type="button" class="btn btn-sm btn-primary" href="/movie/{{ movie.movieId }}">View</a>
                 </div>
-                <small class="text-muted">{{ article.update_date}}</small>
+                <small class="text-muted">{{ movie.runtime}}</small>
               </div>
           </div>
         </div>
@@ -46,13 +46,13 @@
 
 
 
-{% if articles.has_other_pages %}
+{% if movies.has_other_pages %}
       <nav aria-label="..." class="p-5">
         <ul class="pagination justify-content-center">
 
-          {% if articles.has_previous %}
+          {% if movies.has_previous %}
           <li class="page-item ">
-            <a class="page-link" href="?page={{ articles.previous_page_number }}" >Previous</a>
+            <a class="page-link" href="?page={{ movies.previous_page_number }}" >Previous</a>
           </li>
           {% else %}
           <li class="page-item  disabled">
@@ -63,13 +63,13 @@
 
 
 
-          {% for i in page_range|default_if_none:articles.paginator.get_elided_page_range %}
-          {% if articles.number == i %}
+          {% for i in page_range|default_if_none:movies.paginator.get_elided_page_range %}
+          {% if movies.number == i %}
           <li class="page-item active" aria-current="page">
             <a class="page-link" href="#" >{{ i }}</a>
           </li>
 {% else %}
-            {% if i == articles.paginator.ELLIPSIS %}
+            {% if i == movies.paginator.ELLIPSIS %}
                 <li class="page-item"><span class="page-link">{{ i }}</span></li>
             {% else %}
                 <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
@@ -78,9 +78,9 @@
       {% endfor %}
 
 
-          {% if articles.has_next %}
+          {% if movies.has_next %}
           <li class="page-item">
-            <a class="page-link" href="?page={{ articles.next_page_number }}">Next</a>
+            <a class="page-link" href="?page={{ movies.next_page_number }}">Next</a>
           </li>
           {% else %}
           <li class="page-item disabled">
