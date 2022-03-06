@@ -19,4 +19,5 @@ def main():
 
 
 if __name__ == '__main__':
+    from recommender.process.document_process import LemmaTokenizer
     main()
